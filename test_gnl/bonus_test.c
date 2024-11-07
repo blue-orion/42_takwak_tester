@@ -19,21 +19,21 @@ int	main(void)
 	res = get_next_line(-1);
 	printf("res : %s\n", res);
 	// File input
-	if ((fd = open("text.txt", O_RDONLY)) == -1)
+	if ((fd = open("text/text.txt", O_RDONLY)) == -1)
 		return (printf("file open failed\n"));
-	if ((fd_user = open("text_user.txt", O_WRONLY | O_CREAT | O_TRUNC)) == -1)
+	if ((fd_user = open("text/text_user.txt", O_WRONLY | O_CREAT | O_TRUNC)) == -1)
 		return (printf("file open failed\n"));
-	if ((fd2 = open("41_no_nl.txt", O_RDONLY)) == -1)
+	if ((fd2 = open("text/41_no_nl.txt", O_RDONLY)) == -1)
 		return (printf("file open failed\n"));
-	if ((fd2_user = open("41_no_nl_user.txt", O_WRONLY | O_CREAT | O_TRUNC)) == -1)
+	if ((fd2_user = open("text/41_no_nl_user.txt", O_WRONLY | O_CREAT | O_TRUNC)) == -1)
 		return (printf("file open failed\n"));
-	if ((fd3 = open("read_error.txt", O_RDONLY)) == -1)
+	if ((fd3 = open("text/read_error.txt", O_RDONLY)) == -1)
 		return (printf("file open failed\n"));
-	if ((fd3_user = open("read_error_user.txt", O_WRONLY | O_CREAT | O_TRUNC)) == -1)
+	if ((fd3_user = open("text/read_error_user.txt", O_WRONLY | O_CREAT | O_TRUNC)) == -1)
 		return (printf("file open failed\n"));
-	if ((fd4 = open("big_line.txt", O_RDONLY)) == -1)
+	if ((fd4 = open("text/big_line.txt", O_RDONLY)) == -1)
 		return (printf("file open failed\n"));
-	if ((fd4_user = open("big_line_user.txt", O_WRONLY | O_CREAT | O_TRUNC)) == -1)
+	if ((fd4_user = open("text/big_line_user.txt", O_WRONLY | O_CREAT | O_TRUNC)) == -1)
 		return (printf("file open failed\n"));
 	cnt = 1;
 	int	fd_flag = 0;
@@ -84,13 +84,13 @@ int	main(void)
 	close(fd4);
 	close(fd4_user);
 
-	fd = open("only_nl.txt", O_RDONLY);
+	fd = open("text/only_nl.txt", O_RDONLY);
 	if (fd == -1)
 	{
 		printf("file open failed\n");
 		return (0);
 	}
-	fd2 = open("only_nl_user.txt", O_WRONLY | O_CREAT | O_TRUNC);
+	fd2 = open("text/only_nl_user.txt", O_WRONLY | O_CREAT | O_TRUNC);
 	if (fd2 == -1)
 	{
 		printf("file open failed\n");
@@ -110,7 +110,7 @@ int	main(void)
 	close(fd);
 	close(fd2);
 
-	fd = open("read_error.txt", O_RDONLY); fd2 = open("read_error_user.txt", O_WRONLY | O_CREAT | O_TRUNC);
+	fd = open("text/read_error.txt", O_RDONLY); fd2 = open("text/read_error_user.txt", O_WRONLY | O_CREAT | O_TRUNC);
 	for (int i = 1;; i++)
 	{
 		res = get_next_line(fd);
