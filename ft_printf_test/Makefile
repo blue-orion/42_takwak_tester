@@ -13,72 +13,35 @@ MAKEFLAGS += --no-print-directory
 
 CC = cc
 FLAGS = -Werror -Wextra -Wall
-MAKEFLAGS += --no-print-directory
 
-NAME = libftprintf.a
-SRCS = ft_adrlen.c					\
-	   ft_check_flag.c				\
-	   ft_check_type.c				\
-	   ft_check_width.c				\
-	   ft_check_prec.c				\
-	   ft_default_print.c			\
-	   ft_error.c					\
-	   ft_init_struct.c				\
-	   ft_intlen_base.c				\
-	   ft_is_flag_minus.c			\
-	   ft_is_flag_plus.c			\
-	   ft_is_flag_sharp.c			\
-	   ft_is_flag_space.c			\
-	   ft_is_flag_zero.c			\
-	   ft_is_valid_type.c			\
-	   ft_prec_set_zero.c			\
-	   ft_print_arg.c				\
-	   ft_print_type.c				\
-	   ft_print_type_def_cs.c		\
-	   ft_print_type_def_iduxlxp.c	\
-	   ft_printf.c					\
-	   ft_printlen_arg.c			\
-	   ft_sizet_toa_base.c			\
-	   ft_sizetlen_base.c			\
-	   ft_typedef_cps.c				\
-	   ft_typedef_iduxlx.c			\
-	   ft_write.c
-
+TARGET = takwak
 OBJS = $(SRCS:.c=.o)
 
-all : $(NAME)
+ifdef BONUS
+	BONUS_FLAG = 1
+else
+	BONUS_FLAG = 0
+endif
 
-$(NAME) : $(OBJS)
-	make -C ./libft
-	cp ./libft/libft.a $(NAME)
-	ar rcs $@ $^
+all : header compile exe fclean
 
-%.o : %.c
-	$(CC) $(FLAGS) -c $^ -o $@
+exe :
+	@./$(TARGET)
+	@NO_SLEEP=1 valgrind --leak-check=full ./$(TARGET) > valgrind.txt
 
-clean :
-	rm -f *.o libft/*.o
-
-fclean : clean
-	rm -rf $(NAME)
-
-re : fclean all
-
-bonus : $(NAME)
-
-test :
+header : 
 	@cp ../ft_printf.h ./
 	@mkdir libft
 	@cp ../libft/libft.h ./libft/
-	@$(CC) -c Printftest.c
-	@make -C ../
-	@$(CC) ../*.o ../libft/*.o *.o
-	@./a.out
-	@valgrind ./a.out
-	@make fclean -C ../
-	@rm -rf *.o a.out *.h libft
 
-paco :
-	rm -rf ~/goinfre/ft_printf
-	cp -rf $(TEST_DIR) ~/goinfre/
-	rm -rf ~/goinfre/ft_printf/Printftest.c
+compile :
+	@$(CC) -D BONUS=$(BONUS_FLAG) -w -c Printftest.c
+	@make -s -C ../
+	@$(CC) ../*.o ../libft/*.o *.o -o $(TARGET)
+
+fclean :
+	@make -s -C ../ fclean
+	@rm -rf *.o $(TARGET) *.h libft
+
+bonus :
+	make BONUS=1 all
