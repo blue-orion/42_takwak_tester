@@ -5,7 +5,7 @@
 작업 중인 폴더에서 git clone
 ```
 git clone https://github.com/blue-orion/42_takwak_tester takwak_tester
-cp -rf takwak_tester/test_ft_printf ./takwak_tester
+cp -rfT takwak_tester/test_ft_printf ./takwak_tester
 ```
 클론받은 폴더 들어가서
 ```
@@ -23,7 +23,7 @@ make bonus
 작업 중인 폴더에서 git clone
 ```
 git clone https://github.com/blue-orion/42_takwak_tester takwak_tester
-cp -rf takwak_tester/test_gnl ./takwak_tester
+cp -rfT takwak_tester/test_gnl ./takwak_tester
 ```
 클론받은 폴더로 들어가서
 ```
