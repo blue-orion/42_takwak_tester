@@ -8,6 +8,7 @@
 #define GREEN       "\033[1;32m"
 #define YELLOW      "\033[1;33m"
 #define BLUE        "\033[1;34m"
+#define SEC 400000
 
 void	file_close(int fd);
 int		is_fileclose(int fd);
@@ -18,6 +19,17 @@ int		fd_flag = 0;
 int		fd2_flag = 0;
 int		fd3_flag = 0;
 int		fd4_flag = 0;
+void	my_sleep(int seconds)
+{
+	if (getenv("NO_SLEEP") == NULL)
+		usleep(seconds);
+}
+void	print_line()
+{
+	for (int i = 0; i < 80; i++)
+		printf("=");
+	printf("\n");
+}
 
 char	*name1 = "srcs/text.txt";
 char	*name11 = "srcs/text_user.txt";
@@ -68,6 +80,7 @@ int	main(void)
 			}
 			print_filename(cur_fd, YELLOW);
 			printf("(fd = " YELLOW "%d" RESET ")\n%s", cur_fd, res);
+			my_sleep(SEC);
 			write(cur_fd_user, res, strlen(res));
 			free(res);
 		}
@@ -117,6 +130,7 @@ void	file_close(int fd)
 		fd4_flag = 1;
 	print_filename(fd, RED);
 	printf(RED " close\n" RESET);
+	my_sleep(3 * SEC);
 }
 
 void	gnl_loop(int fd, int fd2)
@@ -128,6 +142,7 @@ void	gnl_loop(int fd, int fd2)
 		if ((res = get_next_line(fd)) == NULL)
 			break ;
 		printf("-%d-\n%s", i, res);
+		my_sleep(SEC);
 		write(fd2, res, strlen(res));
 		free(res);
 	}

@@ -27,7 +27,7 @@ int	main(int argc, char *argv[])
 
 	// valgrind 실행
 	printf(YELLOW "Valgrind test\n" RESET "valgrind --leak-check=full ./a.out\n"); print_line();
-	system("valgrind --leak-check=full ./a.out > valgrind.txt");
+	system("NO_SLEEP=1 valgrind --leak-check=full ./a.out > valgrind.txt");
 	print_line(); puts("");
 
 	// diff 실행
